@@ -3,7 +3,7 @@ from contextlib import suppress
 from aiogram.types import Message
 from aiogram.utils.exceptions import MessageCantBeDeleted, MessageToDeleteNotFound
 
-from app.core.loader import bot
+from bot.loader import bot
 
 
 class MessageBox:

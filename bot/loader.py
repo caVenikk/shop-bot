@@ -1,7 +1,8 @@
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
 
-from utils import Accessor, Config
+from utils import Config
+from utils.accessor import Accessor
 
 config = Config.load()
 accessor = Accessor()

@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.3
 FROM python:3.10-alpine
 
-WORKDIR /shop-bot
+WORKDIR .
 
 ENV PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 

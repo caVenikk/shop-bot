@@ -6,7 +6,7 @@ web_app = WebAppInfo(url=f"{config.web_info.webapp_url}/")
 
 web_app_keyboard = ReplyKeyboardMarkup(
     keyboard=[
-        [KeyboardButton(text="Site", web_app=web_app)]
+        [KeyboardButton(text="Оформить заказ", web_app=web_app)]
     ],
     resize_keyboard=True
 )

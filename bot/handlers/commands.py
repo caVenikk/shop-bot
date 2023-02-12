@@ -1,7 +1,6 @@
-import aiohttp
 from aiogram.types import Message
 
-from bot.loader import dp, bot, accessor
+from bot.loader import dp, bot
 from bot.markups.reply import web_app_keyboard
 
 
@@ -12,10 +11,3 @@ async def start_handler(message: Message):
         text='Оформите заказ, нажав на кнопку ниже!',
         reply_markup=web_app_keyboard
     )
-    async with aiohttp.ClientSession() as client:
-        data = {"products": await accessor.get_products(client)}
-        await dp.storage.set_data(
-            chat=message.chat.id,
-            user=message.from_user.id,
-            data=data
-        )

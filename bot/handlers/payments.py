@@ -1,17 +1,16 @@
-from aiogram.types import Message, ContentType
-from aiogram.types import PreCheckoutQuery
+import aiohttp
+from aiogram.types import Message, ContentType, PreCheckoutQuery
 
-from bot.loader import dp, bot, config
+from bot.loader import dp, bot, config, accessor
 
 
 @dp.message_handler(content_types='web_app_data')
 async def buy_process(web_app_message: Message):
-    products = (await dp.storage.get_data(
-        chat=web_app_message.chat.id,
-        user=web_app_message.from_user.id,
-    ))['products']
+    async with aiohttp.ClientSession() as client:
+        products = await accessor.get_products(client)
     product_id = int(web_app_message.web_app_data.data)
-    product = next((product for product in products if product.id == product_id), None)
+    product = next(
+        (product for product in products if product.id == product_id), None)
 
     await bot.send_invoice(
         chat_id=web_app_message.chat.id,

@@ -2,7 +2,7 @@
 
 ## Table of contents
 * [General info](#general-info)
-* [Technologies](#dependencies)
+* [Dependencies](#dependencies)
 * [Setup](#setup)
 * [Implementation example](#implementation-example)
 

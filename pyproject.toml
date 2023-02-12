@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "shop-bot"
-version = "0.0.1"
+version = "0.1.0"
 description = "Bot for shop with webapp in telegram."
 authors = ["Nikita Novikov <sqqvt1@gmail.com>"]
 license = "GNU Affero General Public License v3.0"

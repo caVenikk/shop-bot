@@ -19,7 +19,7 @@ Main project dependencies:
 * python-dotenv
 
 ## Setup
-To run this project, install it locally using poetry:
+To run this project, install all dependencies locally using poetry:
 
 ```
 $ cd ../shop-bot

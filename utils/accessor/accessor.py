@@ -43,19 +43,12 @@ class Accessor:
 
     async def add_user(self, client, user):
         try:
-            db_user = await self.get_user(client, user.id)
-            if db_user:
-                await self.update_user(client, user)
-                return db_user
             async with client.post(
                 f"{self._config.web_info.api_url}/users", json=user.to_dict()
             ) as resp:
                 assert resp.status == 201
-                user = await resp.json()
-                return user
         except ClientConnectionError:
             logger.warning("Cannot connect to API")
-            return
 
     async def add_order(self, client, order: Order):
         try:

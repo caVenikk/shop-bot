@@ -19,12 +19,12 @@ class Accessor:
 
     async def get_user(self, client, user_id):
         try:
-            async with client.get(
-                    f"{self._config.web_info.api_url}/users/{user_id}"
-            ) as resp:
-                assert resp.status == 200
-                user = await resp.json()
-                return User(**user)
+            async with client.get(f"{self._config.web_info.api_url}/users/{user_id}") as resp:
+    if resp.status == 404:
+        return None
+    assert resp.status == 200
+    user = await resp.json()
+    return User(**user)
         except ClientConnectionError:
             logger.warning("Cannot connect to API")
             return None

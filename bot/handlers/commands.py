@@ -17,7 +17,7 @@ async def start_handler(message: Message):
     async with aiohttp.ClientSession() as client:
         await accessor.add_user(client, user)
 
-    text = "Приступим к заказу!🍟\nНажмите на кнопку ниже или в меню, чтобы заказать идеальный обед!🌯"
+    text = "Приступим к заказу! 🍟\nНажмите на кнопку ниже или в меню, чтобы заказать идеальный обед! 🌯"
     await bot.send_message(
         chat_id=message.chat.id,
         text=text,

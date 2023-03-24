@@ -18,6 +18,11 @@ class InvoiceLinkView(View):
             )
         async with aiohttp.ClientSession() as client:
             db_products = await accessor.get_products(client)
+        if db_products is None:
+            return json_response(
+                status=500,
+                reason="Internal Server Error",
+            )
         product = next(
             (product for product in db_products if product == request_product), None
         )

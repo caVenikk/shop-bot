@@ -11,7 +11,7 @@ class Accessor:
         self._config = Config.load()
 
     async def get_products(self, client):
-        async with client.get(f"{self._config.web_info.api_url}/products") as resp:
+        async with client.get(f"{self._config.web_info.api_url}/products/") as resp:
             assert resp.status == 200
             result_json = await resp.json()
             products = [Product(**product) for product in result_json]
@@ -32,7 +32,7 @@ class Accessor:
     async def update_user(self, client, user):
         try:
             async with client.put(
-                f"{self._config.web_info.api_url}/users", json=user.to_dict()
+                f"{self._config.web_info.api_url}/users/", json=user.to_dict()
             ) as resp:
                 assert resp.status == 200
                 user = await resp.json()
@@ -44,7 +44,7 @@ class Accessor:
     async def add_user(self, client, user):
         try:
             async with client.post(
-                f"{self._config.web_info.api_url}/users", json=user.to_dict()
+                f"{self._config.web_info.api_url}/users/", json=user.to_dict()
             ) as resp:
                 assert resp.status == 201
         except ClientConnectionError:
@@ -53,7 +53,7 @@ class Accessor:
     async def add_order(self, client, order: Order):
         try:
             async with client.post(
-                f"{self._config.web_info.api_url}/orders", json=order.to_dict()
+                f"{self._config.web_info.api_url}/orders/", json=order.to_dict()
             ) as resp:
                 assert resp.status == 201
                 order = await resp.json()

@@ -1,5 +1,5 @@
 from utils import Config
-from utils.schemas import Product
+from utils.schemas import Product, Order
 
 
 class Accessor:
@@ -12,3 +12,11 @@ class Accessor:
             result_json = await resp.json()
             products = [Product(**product) for product in result_json]
             return products
+
+    async def add_order(self, client, order: Order):
+        async with client.post(
+            f"{self._config.web_info.api_url}/orders", json=order.to_dict()
+        ) as resp:
+            assert resp.status == 201
+            result_json = await resp.json()
+            return result_json

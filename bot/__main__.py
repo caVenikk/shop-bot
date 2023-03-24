@@ -26,15 +26,17 @@ def on_events():
 
 
 async def main():
-    app.router.add_view('/create_invoice_link', InvoiceLinkView)
+    app.router.add_view("/create_invoice_link", InvoiceLinkView)
     runner = web.AppRunner(app)
     await runner.setup()
-    site = web.TCPSite(runner, '127.0.0.1', 8888)
+    site = web.TCPSite(runner, "127.0.0.1", 8888)
     await site.start()
     logger.info(f"Web app is running on {site.name}")
 
     logger.info(f"Number of message handlers: {len(dp.message_handlers.handlers)}.")
-    logger.info(f"Number of callback query handlers: {len(dp.callback_query_handlers.handlers)}.")
+    logger.info(
+        f"Number of callback query handlers: {len(dp.callback_query_handlers.handlers)}."
+    )
     on_startup, on_shutdown = on_events()
     start_polling(
         dispatcher=dp,
@@ -44,5 +46,5 @@ async def main():
     )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(main())

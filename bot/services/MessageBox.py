@@ -7,8 +7,8 @@ from bot.loader import bot
 
 
 class MessageBox:
-    _storage: dict[int: [Message]] = dict()
-    _messages: dict[int: {int}] = dict()
+    _storage: dict[int:[Message]] = dict()
+    _messages: dict[int:{int}] = dict()
 
     @classmethod
     def put(cls, message: Message, user_id: int):
@@ -34,7 +34,9 @@ class MessageBox:
             if _message is not None:
                 if user_id in cls._messages:
                     cls._messages[user_id].discard(_message.message_id)
-                await bot.delete_message(chat_id=user_id, message_id=_message.message_id)
+                await bot.delete_message(
+                    chat_id=user_id, message_id=_message.message_id
+                )
 
     @classmethod
     async def replace_last(cls, user_id: int, message: Message):

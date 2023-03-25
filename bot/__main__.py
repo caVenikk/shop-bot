@@ -6,7 +6,7 @@ from aiohttp import web
 from loguru import logger
 
 from bot.handlers import dp
-from bot.loader import app
+from bot.loader import app, config
 from bot.views.invoice import InvoiceLinkView
 
 nest_asyncio.apply()
@@ -29,7 +29,7 @@ async def main():
     app.router.add_view("/create_invoice_link", InvoiceLinkView)
     runner = web.AppRunner(app)
     await runner.setup()
-    site = web.TCPSite(runner, "127.0.0.1", 8888)
+    site = web.TCPSite(runner, config.bot_app.host if config.bot_app.host else "127.0.0.1", 8888)
     await site.start()
     logger.info(f"Web app is running on {site.name}")
 

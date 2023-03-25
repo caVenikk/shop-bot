@@ -16,9 +16,15 @@ class Telegram:
 
 
 @dataclass
+class BotApp:
+    host: str | None = None
+
+
+@dataclass
 class Config:
     web_info: WebInfo | None = None
     telegram: Telegram | None = None
+    bot_app: BotApp | None = None
     _config: ClassVar[Optional["Config"]] = None
 
     @classmethod
@@ -38,6 +44,9 @@ class Config:
                 telegram=Telegram(
                     bot_token=os.environ["BOT_TOKEN"],
                     payment_token=os.environ["PAYMENT_TOKEN"],
+                ),
+                bot_app=BotApp(
+                    host=os.environ["BOT_HOST"],
                 ),
             )
         except KeyError:

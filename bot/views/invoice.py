@@ -1,3 +1,5 @@
+from json import JSONDecodeError
+
 import aiohttp
 from aiohttp.web import json_response
 
@@ -8,9 +10,21 @@ from utils.schemas import Product
 
 class InvoiceLinkView(View):
     async def post(self):
-        data = await self.request.json()
-        request_product = Product.from_dict(data["product"])
-        user_id = data["user_id"]
+        try:
+            data = await self.request.json()
+        except JSONDecodeError:
+            return json_response(
+                status=400,
+                reason="Bad request",
+            )
+        try:
+            request_product = Product.from_dict(data["product"])
+            user_id = data["user_id"]
+        except KeyError:
+            return json_response(
+                status=402,
+                reason="Unprocessable Entity",
+            )
         if not request_product:
             return json_response(
                 status=400,

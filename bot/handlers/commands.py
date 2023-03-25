@@ -2,7 +2,7 @@ import aiohttp
 from aiogram.types import Message
 
 from bot.loader import dp, bot, accessor
-from bot.markups.reply import web_app_keyboard
+from bot.markups.inline import web_app_keyboard
 from utils.schemas.users import User
 
 

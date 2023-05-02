@@ -19,9 +19,7 @@ class Accessor:
 
     async def get_user(self, client, user_id):
         try:
-            async with client.get(
-                f"{self._config.web_info.api_url}/users/{user_id}"
-            ) as resp:
+            async with client.get(f"{self._config.web_info.api_url}/users/{user_id}") as resp:
                 assert resp.status == 200
                 user = await resp.json()
                 return User(**user)
@@ -31,9 +29,7 @@ class Accessor:
 
     async def update_user(self, client, user):
         try:
-            async with client.put(
-                f"{self._config.web_info.api_url}/users/", json=user.to_dict()
-            ) as resp:
+            async with client.put(f"{self._config.web_info.api_url}/users/", json=user.to_dict()) as resp:
                 assert resp.status == 200
                 user = await resp.json()
                 return user
@@ -43,21 +39,30 @@ class Accessor:
 
     async def add_user(self, client, user):
         try:
-            async with client.post(
-                f"{self._config.web_info.api_url}/users/", json=user.to_dict()
-            ) as resp:
+            async with client.post(f"{self._config.web_info.api_url}/users/", json=user.to_dict()) as resp:
                 assert resp.status == 201
         except ClientConnectionError:
             logger.warning("Cannot connect to API")
 
     async def add_order(self, client, order: Order):
         try:
-            async with client.post(
-                f"{self._config.web_info.api_url}/orders/", json=order.to_dict()
-            ) as resp:
+            async with client.post(f"{self._config.web_info.api_url}/orders/", json=order.to_dict()) as resp:
                 assert resp.status == 201
                 order = await resp.json()
                 return order
+        except ClientConnectionError:
+            logger.warning("Cannot connect to API")
+            return
+
+    async def get_last_order_id(self, client):
+        try:
+            # TODO: headers ???
+            async with client.get(f"{self._config.web_info.api_url}/orders/last_id") as resp:
+                print(resp.status)
+                print(await resp.json())
+                assert resp.status == 200
+                order_id = await resp.json()
+                return order_id
         except ClientConnectionError:
             logger.warning("Cannot connect to API")
             return

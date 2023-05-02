@@ -7,12 +7,12 @@ from aiogram.types import LabeledPrice
 class Product:
     id: int
     title: str
-    price: int | list[LabeledPrice]
+    price: int | LabeledPrice
     weight: float | None = None
     description: str | None = None
 
     def __post_init__(self):
-        self.price = [LabeledPrice(label=self.title, amount=int(self.price * 100))]
+        self.price = LabeledPrice(label=self.title, amount=int(self.price * 100))
 
     @classmethod
     def from_dict(cls, product: dict):

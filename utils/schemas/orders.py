@@ -4,7 +4,8 @@ from dataclasses import dataclass
 @dataclass
 class Order:
     user_id: int
-    product_id: int
+    products_ids: list[int]
+    counters: list[int]
     name: str
     phone_number: str
     country_code: str
@@ -18,7 +19,8 @@ class Order:
     def to_dict(self):
         return dict(
             user_id=self.user_id,
-            product_id=self.product_id,
+            products_ids=self.products_ids,
+            counters=self.counters,
             name=self.name,
             phone_number=self.phone_number,
             country_code=self.country_code,

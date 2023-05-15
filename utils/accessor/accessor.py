@@ -56,10 +56,7 @@ class Accessor:
 
     async def get_last_order_id(self, client):
         try:
-            # TODO: headers ???
             async with client.get(f"{self._config.web_info.api_url}/orders/last_id") as resp:
-                print(resp.status)
-                print(await resp.json())
                 assert resp.status == 200
                 order_id = await resp.json()
                 return order_id

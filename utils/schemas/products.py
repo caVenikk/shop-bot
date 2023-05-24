@@ -8,6 +8,7 @@ class Product:
     id: int
     title: str
     price: int
+    active: bool
     counter: int | None = None
     weight: float | None = None
     description: str | None = None
@@ -17,11 +18,5 @@ class Product:
         return LabeledPrice(label=f"{self.title} x{self.counter}", amount=int(self.price * self.counter * 100))
 
     @classmethod
-    def from_dict(cls, product: dict):
-        return cls(
-            id=product["id"],
-            title=product["title"],
-            price=product["price"],
-            weight=product["weight"],
-            description=product["description"],
-        )
+    def from_dict(cls, product: dict, **_):
+        return cls(**product)

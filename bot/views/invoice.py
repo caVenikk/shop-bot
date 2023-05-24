@@ -12,15 +12,14 @@ class InvoiceLinkView(View):
     async def post(self):
         try:
             data = await self.request.json()
+            request_products = [Product.from_dict(product) for product in data["products"]]
+            counters = [int(value) for value in data["counters"]]
+            user_id = data["user_id"]
         except JSONDecodeError:
             return json_response(
                 status=400,
                 reason="Bad request",
             )
-        try:
-            request_products = [Product.from_dict(product) for product in data["products"]]
-            counters = [int(value) for value in data["counters"]]
-            user_id = data["user_id"]
         except KeyError:
             return json_response(
                 status=402,

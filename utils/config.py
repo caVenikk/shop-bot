@@ -46,7 +46,7 @@ class Config:
                     payment_token=os.environ["PAYMENT_TOKEN"],
                 ),
                 bot_app=BotApp(
-                    host=os.environ["BOT_HOST"],
+                    host=os.environ["HOST"],
                 ),
             )
         except KeyError:

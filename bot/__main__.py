@@ -34,9 +34,7 @@ async def main():
     logger.info(f"Web app is running on {site.name}")
 
     logger.info(f"Number of message handlers: {len(dp.message_handlers.handlers)}.")
-    logger.info(
-        f"Number of callback query handlers: {len(dp.callback_query_handlers.handlers)}."
-    )
+    logger.info(f"Number of callback query handlers: {len(dp.callback_query_handlers.handlers)}.")
     on_startup, on_shutdown = on_events()
     start_polling(
         dispatcher=dp,

@@ -34,9 +34,7 @@ class MessageBox:
             if _message is not None:
                 if user_id in cls._messages:
                     cls._messages[user_id].discard(_message.message_id)
-                await bot.delete_message(
-                    chat_id=user_id, message_id=_message.message_id
-                )
+                await bot.delete_message(chat_id=user_id, message_id=_message.message_id)
 
     @classmethod
     async def replace_last(cls, user_id: int, message: Message):
